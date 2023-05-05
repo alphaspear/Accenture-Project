@@ -2,6 +2,7 @@ package accenture.project.user;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class User {
 	private int Pincode;
 	private LocalDate DateOfBirth;
 	private LocalDate DateOfJoining;
+	@Column(columnDefinition = "boolean default false")
 	private boolean DeletionFlag;
 	public int getId() {
 		return id;
