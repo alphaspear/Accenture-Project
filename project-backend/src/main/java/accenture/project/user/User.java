@@ -9,20 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="users")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private int id;
-	private String FirstName;
-	private String LastName;
-	private String Address;
-	private int Pincode;
-	private LocalDate DateOfBirth;
-	private LocalDate DateOfJoining;
+	private String firstName;
+	private String lastName;
+	private String address;
+	private int pincode;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate dateOfBirth;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate dateOfJoining;
 	@Column(columnDefinition = "boolean default false")
-	private boolean DeletionFlag;
+	private boolean deletionFlag;
 	public int getId() {
 		return id;
 	}
@@ -30,45 +34,45 @@ public class User {
 		this.id = id;
 	}
 	public String getFirstName() {
-		return FirstName;
+		return firstName;
 	}
 	public void setFirstName(String firstName) {
-		FirstName = firstName;
+		this.firstName = firstName;
 	}
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 	public int getPincode() {
-		return Pincode;
+		return pincode;
 	}
 	public void setPincode(int pincode) {
-		Pincode = pincode;
+		this.pincode = pincode;
 	}
 	public boolean isDeletionFlag() {
-		return DeletionFlag;
+		return deletionFlag;
 	}
 	public void setDeletionFlag(boolean deletionFlag) {
-		DeletionFlag = deletionFlag;
+		this.deletionFlag = deletionFlag;
 	}
 	public LocalDate getDateOfBirth() {
-		return DateOfBirth;
+		return dateOfBirth;
 	}
 	public void setDateOfBirth(LocalDate dateOfBirth) {
-		DateOfBirth = dateOfBirth;
+		this.dateOfBirth = dateOfBirth;
 	}
 	public LocalDate getDateOfJoining() {
-		return DateOfJoining;
+		return dateOfJoining;
 	}
 	public void setDateOfJoining(LocalDate dateOfJoining) {
-		DateOfJoining = dateOfJoining;
+		this.dateOfJoining = dateOfJoining;
 	}
 }

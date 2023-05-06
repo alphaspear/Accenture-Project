@@ -17,7 +17,7 @@ public class ShowController {
 	
 	@Autowired
 	private UserRepository userRepository;	
-	@GetMapping("/")
+	@GetMapping("")
 	public List<User> showAll() {
 		return userRepository.findAll();
 	}
