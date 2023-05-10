@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import accenture.project.errors.UserNotFoundException;
 import accenture.project.repository.UserRepository;
 import accenture.project.user.User;
 
@@ -37,6 +38,8 @@ public class SearchController {
 	            searchResults.add(user);
 	        }
 	    }
+	    if(searchResults.isEmpty())
+	    	throw new UserNotFoundException("USER NOT FOUND");  
 	    return searchResults;
 	}
 	
@@ -49,6 +52,8 @@ public class SearchController {
 	            searchResults.add(user);
 	        }
 	    }
+	    if(searchResults.isEmpty())
+	    	throw new UserNotFoundException("USER NOT FOUND");  
 	    return searchResults;
 	}
 	
@@ -61,6 +66,8 @@ public class SearchController {
 	            searchResults.add(user);
 	        }
 	    }
+	    if(searchResults.isEmpty())
+	    	throw new UserNotFoundException("USER NOT FOUND");  
 	    return searchResults;
 	}
 }

@@ -17,12 +17,12 @@ import accenture.project.user.User;
 public class SortController {
 	@Autowired
 	private UserRepository userRepository;	
-
-	@GetMapping("/dob")
-    public List<User> getUsersSortedByDateOfBirth() {
-        Sort sort = Sort.by(Direction.DESC, "DateOfBirth");
-        return userRepository.findAll(sort);
-    }
+//
+//	@GetMapping("/dob")
+//    public List<User> getUsersSortedByDateOfBirth() {
+//        Sort sort = Sort.by(Direction.DESC, "DateOfBirth");
+//        return userRepository.findAll(sort);
+//    }
 	
 //	@GetMapping("/doj")
 //    public List<User> getUsersSortedByDateOfJoining() {
@@ -39,5 +39,17 @@ public class SortController {
 	    Sort sortByDateOfJoining = Sort.by(direction, "DateOfJoining");
 	    return userRepository.findAll(sortByDateOfJoining);
 	}
+	
+	@GetMapping("/dob")
+	public List<User> getUsersSortedByDateOfBirth(@RequestParam(name = "sort", defaultValue = "desc") String sort) {
+	    Direction direction = Direction.DESC;
+	    if (sort.equalsIgnoreCase("asc")) {
+	        direction = Direction.ASC;
+	    }
+	    Sort sortByDateOfBirth = Sort.by(direction, "DateOfBirth");
+	    return userRepository.findAll(sortByDateOfBirth);
+	}
+	
+	
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import accenture.project.errors.UserNotFoundException;
 import accenture.project.repository.UserRepository;
 import accenture.project.user.User;
 
@@ -24,12 +25,9 @@ public class ShowController {
 	
 	@GetMapping("/{id}")
 	public User showOne(@PathVariable int id) {
-		if(userRepository.existsById(id))
-			return userRepository.findById(id).get();
-		User error =new User();
-		error.setFirstName("Error");
-		error.setLastName("error");
-		return error;
+		if(!userRepository.existsById(id))
+			throw new UserNotFoundException("USER NOT FOUND");  
+		return userRepository.findById(id).get();
 		
 	}
 }
