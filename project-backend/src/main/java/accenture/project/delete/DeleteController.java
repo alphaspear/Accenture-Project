@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import accenture.project.errors.UserNotFoundException;
 import accenture.project.repository.UserRepository;
 
 @RestController
@@ -17,7 +18,8 @@ public class DeleteController {
 	
 	@DeleteMapping("/{id}")
 	public void deleteOne(@PathVariable int id) {
-		if(userRepository.existsById(id))
+		if(!userRepository.existsById(id))
+			throw new UserNotFoundException("USER NOT FOUND"); 
 			userRepository.deleteById(id);
 		return;
 	}

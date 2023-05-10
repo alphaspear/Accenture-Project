@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import accenture.project.errors.UserNotFoundException;
 import accenture.project.repository.UserRepository;
 import accenture.project.user.User;
 
@@ -21,6 +22,8 @@ public class TrashController {
 	
 	@DeleteMapping("/{id}")
 	public void trashOne(@PathVariable int id) {
+		if(!userRepository.existsById(id))
+			throw new UserNotFoundException("USER NOT FOUND"); 
 		User t0 = userRepository.findById(id).get();
 		t0.setDeletionFlag(true);
 		userRepository.save(t0);
@@ -35,6 +38,8 @@ public class TrashController {
 	
 	@GetMapping("/restore/{id}")
 	public void restoreOne(@PathVariable int id) {
+		if(!userRepository.existsById(id))
+			throw new UserNotFoundException("USER NOT FOUND"); 
 		User t0 = userRepository.findById(id).get();
 		t0.setDeletionFlag(false);
 		userRepository.save(t0);

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import accenture.project.errors.UserNotFoundException;
 import accenture.project.repository.UserRepository;
 import accenture.project.user.User;
 
@@ -19,6 +20,9 @@ public class EditController {
 	@PutMapping("/{id}")
 	public void updateFullTopic(@PathVariable int id, @RequestBody User t1)
 	{
+		if(!userRepository.existsById(id))
+			throw new UserNotFoundException("USER NOT FOUND"); 
+		
 		User t0 = userRepository.findById(id).get();
 		
 		if(!(t1.getFirstName()==null))
